@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw1web
+  labels:
+    app: hw1web
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      name: hw1web
+  template:
+    metadata:
+      labels:
+        name: hw1web
+    spec:
+      containers:
+        - name: web
+          image:  yegemberdin/hw1web
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hw1web
+spec:
+  ports:
+    - port: 3000
+  selector:
+    name: hw1web
+  type: NodePort
